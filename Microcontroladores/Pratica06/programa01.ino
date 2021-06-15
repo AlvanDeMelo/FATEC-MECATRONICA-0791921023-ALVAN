@@ -38,16 +38,22 @@ void inicializar_hardware(){
   pinMode(CHAVE_1, INPUT);
 }
 
+void realizarLeituraPotenciometro(){
+  //Realiza a leitura
+  int dado = analogRead(POTENCIOMETRO);
+  //Imprime ele na porta
+  Serial.println(dado);
+}
+
 void setup() {
   inicializar_hardware();
+  //Configurar a comunicação Serial
+  Serial.begin(9600);
 }
 
 void loop() {
-  //CHAVE_1 - Liga MOTOR_DC
+  //CHAVE_1 - Realizar leitura analógica
   if(digitalRead(CHAVE_1) == CHAVE_ACIONADA)
-    digitalWrite(MOTOR_DC, MOTOR_DC_LIGADO);
-  //CHAVE_2 - Desliga o MOTOR_DC
-  if(digitalRead(CHAVE_2) == CHAVE_ACIONADA)
-    digitalWrite(MOTOR_DC, MOTOR_DC_DESLIGADO);
+    realizarLeituraPotenciometro();
 
 }
